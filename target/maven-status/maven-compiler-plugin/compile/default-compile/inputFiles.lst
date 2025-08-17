@@ -1,0 +1,9 @@
+/home/junior/Projetos/autenticacao/src/main/java/com/padrao/autenticacao/AutenticacaoApplication.java
+/home/junior/Projetos/autenticacao/src/main/java/com/padrao/autenticacao/controller/UsuarioController.java
+/home/junior/Projetos/autenticacao/src/main/java/com/padrao/autenticacao/dto/request/CadastrarUsuarioRequest.java
+/home/junior/Projetos/autenticacao/src/main/java/com/padrao/autenticacao/dto/response/UsuarioResponse.java
+/home/junior/Projetos/autenticacao/src/main/java/com/padrao/autenticacao/mapper/UsuarioMapper.java
+/home/junior/Projetos/autenticacao/src/main/java/com/padrao/autenticacao/model/Usuario.java
+/home/junior/Projetos/autenticacao/src/main/java/com/padrao/autenticacao/repository/UsuarioRepository.java
+/home/junior/Projetos/autenticacao/src/main/java/com/padrao/autenticacao/service/UsuarioService.java
+/home/junior/Projetos/autenticacao/src/main/java/com/padrao/autenticacao/service/impl/UsuarioServiceImpl.java
