@@ -3,6 +3,7 @@ package com.padrao.autenticacao.controller;
 import com.padrao.autenticacao.dto.request.CadastrarUsuarioRequest;
 import com.padrao.autenticacao.dto.request.ListarUsuarioRequest;
 import com.padrao.autenticacao.dto.response.UsuarioResponse;
+import com.padrao.autenticacao.security.JwtUtil;
 import com.padrao.autenticacao.service.UsuarioService;
 import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
@@ -33,5 +34,6 @@ public class UsuarioController {
         Page<UsuarioResponse> response = usuarioService.listarUsuarioPaginado(request);
         return ResponseEntity.ok(response);
     }
+
 
 }

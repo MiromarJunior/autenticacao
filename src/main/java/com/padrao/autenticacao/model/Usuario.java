@@ -20,4 +20,7 @@ public class Usuario {
     @Email
     @Column(unique = true)
     private String email;
+
+    @NotBlank
+    private String senha;
 }

@@ -4,6 +4,7 @@ import com.padrao.autenticacao.dto.request.CadastrarUsuarioRequest;
 import com.padrao.autenticacao.dto.request.ListarUsuarioRequest;
 import com.padrao.autenticacao.dto.response.UsuarioResponse;
 import com.padrao.autenticacao.exception.DuplicidadeException;
+import com.padrao.autenticacao.exception.EntityNotFoundException;
 import com.padrao.autenticacao.mapper.UsuarioMapper;
 import com.padrao.autenticacao.model.Usuario;
 import com.padrao.autenticacao.repository.UsuarioRepository;
@@ -13,6 +14,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,14 +24,18 @@ public class UsuarioServiceImpl implements UsuarioService {
 
     private final UsuarioRepository usuarioRepository;
 
-    public UsuarioServiceImpl(UsuarioRepository usuarioRepository) {
+    private final PasswordEncoder passwordEncoder;
+
+    public UsuarioServiceImpl(UsuarioRepository usuarioRepository, PasswordEncoder passwordEncoder) {
         this.usuarioRepository = usuarioRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
     public UsuarioResponse salvar(CadastrarUsuarioRequest request) {
         validarEmail(request.getEmail());
         Usuario entity = UsuarioMapper.INSTANCE.toEntity(request);
+        entity.setSenha(passwordEncoder.encode(entity.getSenha()));
         Usuario savedEntity = usuarioRepository.save(entity);
         return UsuarioMapper.INSTANCE.toDto(savedEntity);
     }
@@ -45,9 +51,11 @@ public class UsuarioServiceImpl implements UsuarioService {
     }
 
     private void validarEmail(String email) {
-        List<Usuario> lista = usuarioRepository.findByEmail(email);
-        if (lista != null && !lista.isEmpty()) {
-            throw new DuplicidadeException(String.format("O e-mail informado: %s, já está em uso!", email));
+        boolean existe = usuarioRepository.findByEmail(email).isPresent();
+        if (existe) {
+            throw new DuplicidadeException(
+                    String.format("O e-mail informado: %s já está em uso!", email)
+            );
         }
     }
 

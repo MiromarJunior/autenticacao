@@ -1,6 +1,7 @@
 package com.padrao.autenticacao.dto.request;
 
 import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
@@ -20,4 +21,8 @@ public class CadastrarUsuarioRequest {
     @NotBlank(message = "Email é obrigatório")
     @Size(max = 200)
     private String email;
+
+    @Size(min = 6, max = 30, message = "Senha deve ter entre {min} e {max} caracteres")
+    @NotBlank(message = "Senha é obrigatório")
+    private String senha;
 }
