@@ -1,7 +1,7 @@
 package com.padrao.autenticacao.usuario.service.impl;
 
 import com.padrao.autenticacao.usuario.dto.request.CadastrarUsuarioRequest;
-import com.padrao.autenticacao.usuario.dto.request.ListarUsuarioRequest;
+import com.padrao.autenticacao.usuario.dto.request.ListarUsuarioRequestPaginado;
 import com.padrao.autenticacao.usuario.dto.response.UsuarioResponse;
 import com.padrao.autenticacao.exception.DuplicidadeException;
 import com.padrao.autenticacao.usuario.mapper.UsuarioMapper;
@@ -40,7 +40,7 @@ public class UsuarioServiceImpl implements UsuarioService {
     }
 
     @Override
-    public Page<UsuarioResponse> listarUsuarioPaginado(ListarUsuarioRequest filtro) {
+    public Page<UsuarioResponse> listarUsuarioPaginado(ListarUsuarioRequestPaginado filtro) {
         PageRequest paginacao = PageRequest.of(filtro.getPage(), filtro.getSize(), Sort.by(filtro.getDirection(), filtro.getSort().getOrdenacao()));
         Page<Usuario> entities = usuarioRepository.findAll(
                 UsuarioSpecification.filtrarUsuarioPaginado(filtro), paginacao

@@ -1,7 +1,7 @@
 package com.padrao.autenticacao.usuario.controller;
 
 import com.padrao.autenticacao.usuario.dto.request.CadastrarUsuarioRequest;
-import com.padrao.autenticacao.usuario.dto.request.ListarUsuarioRequest;
+import com.padrao.autenticacao.usuario.dto.request.ListarUsuarioRequestPaginado;
 import com.padrao.autenticacao.usuario.dto.response.UsuarioResponse;
 import com.padrao.autenticacao.usuario.service.UsuarioService;
 import jakarta.validation.Valid;
@@ -29,7 +29,7 @@ public class UsuarioController {
 
     @GetMapping("/paginado")
     public ResponseEntity<Page<UsuarioResponse>> listarPaginado(
-            ListarUsuarioRequest request){
+            ListarUsuarioRequestPaginado request){
         Page<UsuarioResponse> response = usuarioService.listarUsuarioPaginado(request);
         return ResponseEntity.ok(response);
     }

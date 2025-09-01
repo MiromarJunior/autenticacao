@@ -8,8 +8,8 @@ CREATE TABLE IF NOT EXISTS sch_autenticacao.tb_perfil (
     CONSTRAINT perfil_unique_nome UNIQUE (nome)
 );
 
-INSERT INTO sch_autenticacao.tb_perfil (nome, descricao, status)
-VALUES ('ADM', 'Administrador', true);
+INSERT INTO sch_autenticacao.tb_perfil (id, nome, descricao, status)
+VALUES (999999, 'ADM', 'Administrador', true);
 
 INSERT INTO sch_autenticacao.tb_perfil (nome, descricao, status)
 VALUES ('USUARIO', 'Usuário', true);

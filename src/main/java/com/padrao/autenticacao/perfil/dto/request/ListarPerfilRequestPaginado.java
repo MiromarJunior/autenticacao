@@ -1,19 +1,19 @@
-package com.padrao.autenticacao.usuario.dto.request;
+package com.padrao.autenticacao.perfil.dto.request;
 
 import com.padrao.autenticacao.usuario.enums.UsuarioPaginadoOrdenacaoEnum;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.data.domain.Sort;
 
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
-public class ListarUsuarioRequest {
+@Getter
+@Setter
+public class ListarPerfilRequestPaginado {
 
     private String nome;
 
-    private String email;
+    private String descricao;
+
+    private Boolean status;
 
     private Sort.Direction direction = Sort.Direction.ASC;
 

@@ -1,6 +1,6 @@
 package com.padrao.autenticacao.usuario.specification;
 
-import com.padrao.autenticacao.usuario.dto.request.ListarUsuarioRequest;
+import com.padrao.autenticacao.usuario.dto.request.ListarUsuarioRequestPaginado;
 import com.padrao.autenticacao.usuario.model.Usuario;
 import io.micrometer.common.util.StringUtils;
 import jakarta.persistence.criteria.CriteriaBuilder;
@@ -13,7 +13,7 @@ import java.util.stream.Stream;
 
 public class UsuarioSpecification {
 
-    public static Specification<Usuario> filtrarUsuarioPaginado(ListarUsuarioRequest filtro) {
+    public static Specification<Usuario> filtrarUsuarioPaginado(ListarUsuarioRequestPaginado filtro) {
         return (root, query, builder) -> {
 
             Predicate predicatesAnd = getPredicatesAnd(filtro, root, builder);
@@ -34,12 +34,12 @@ public class UsuarioSpecification {
 
     private static Predicate getPredicateEmail(String email, Root<Usuario> root, CriteriaBuilder builder) {
         if (StringUtils.isNotEmpty(email)) {
-            return builder.equal(builder.lower(root.get("nome")), email.toLowerCase());
+            return builder.equal(builder.lower(root.get("email")), email.toLowerCase());
         }
         return null;
     }
 
-    private static Predicate getPredicatesAnd(ListarUsuarioRequest filtro, Root<Usuario> root, CriteriaBuilder builder) {
+    private static Predicate getPredicatesAnd(ListarUsuarioRequestPaginado filtro, Root<Usuario> root, CriteriaBuilder builder) {
 
         Predicate[] predicates = getPredicates(
                 getPredicateNome(filtro.getNome(), root, builder),
